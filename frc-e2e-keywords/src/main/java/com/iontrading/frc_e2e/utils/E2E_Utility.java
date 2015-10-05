@@ -15,7 +15,7 @@ public class E2E_Utility {
     public static final String ROBOT_LIBRARY_SCOPE = "GLOBAL";
 
     public static final String ROBOT_LIBRARY_VERSION = "1.0.0";
-
+    
     static final Pattern WASH_NAME_REGEX = Pattern.compile("[^a-zA-Z0-9@#_]");
     
     public HashMap<String, Integer> value_type_enum = new HashMap<String, Integer>();
