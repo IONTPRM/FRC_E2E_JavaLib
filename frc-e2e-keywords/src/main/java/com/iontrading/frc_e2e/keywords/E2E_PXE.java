@@ -8,6 +8,8 @@ import org.robotframework.javalib.annotation.RobotKeywords;
 
 import com.iontrading.jmix.subscribe.function.IFunctionCallResult;
 import com.iontrading.robotframework.keywords2.FunctionRepository;
+import com.iontrading.robotframework.base.IReadableRecord;
+import com.iontrading.robotframework.keywords2.MkvRecordRepository;
 
 @RobotKeywords
 public class E2E_PXE {
@@ -16,6 +18,7 @@ public class E2E_PXE {
 	public static String PXE_CURRENCY;
 
 	private final FunctionRepository funcRep = new FunctionRepository();
+	private final MkvRecordRepository recordRepository = new MkvRecordRepository();  
 
 	public Map<String, Integer> anlPYCalcFuncResFieldValuePos = new HashMap<String, Integer>();
 	
@@ -49,6 +52,26 @@ public class E2E_PXE {
 	
 	/**
 	 * 
+	 * @param user
+	 * @param password
+	 * @throws Exception 
+	 */
+	@RobotKeyword
+	public void loginToPXE(String user, String password) throws Exception {
+		Object[] args = new Object[] {"user", user, "Pwd", password};
+		funcRep.functionDefine(PXE_SOURCE, "VCMILogin", args);
+		funcRep.functionSetTimeout("5s");
+		funcRep.functionVerifyReturn("0", "OK");
+		IFunctionCallResult funcResult = funcRep.functionCall();
+		
+		String recName = recordRepository.recordDefine(PXE_SOURCE, "CM_LOGIN", PXE_CURRENCY, user);
+		recordRepository.recordSetTimeout(recName, "5s");
+		IReadableRecord record = recordRepository.recordVerifyFields(recName, new Object[] {"TStatusStr", "==", "On"});
+		recordRepository.recordSubscribe(recName);
+	}
+	
+	/**
+	 * 
 	 * @param fieldNameToGetValue
 	 * @param instrumentId
 	 * @param value
@@ -57,7 +80,7 @@ public class E2E_PXE {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getValueUsingAnlpycalcFunc(String fieldNameToGetValue, String instrumentId, String value, String valueType, String dateSettl) throws Exception {
+	public String getValueUsingAnlpycalcFunc(String fieldNameToGetValue, String instrumentId, Double value, Integer valueType, Integer dateSettl) throws Exception {
 		
 		setANLPYCalcFuncResFieldValuePos();
 		
