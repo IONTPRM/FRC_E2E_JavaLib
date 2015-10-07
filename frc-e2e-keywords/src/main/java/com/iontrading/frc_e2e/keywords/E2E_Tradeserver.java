@@ -13,24 +13,14 @@ public class E2E_Tradeserver {
     public static final String ROBOT_LIBRARY_DOC_FORMAT = "HTML";
 
     private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Tradeserver.class.getName());
-    
-	public static String TS_SOURCE;
-	public static String TS_CURRENCY;
-	
+    	
 	private final MkvRecordRepository recordRepository = new MkvRecordRepository();  
 		
-	@RobotKeyword
-	public void setTradeserverSourceAndCurrency(String source, String currency) {
-		
-		E2E_Tradeserver.TS_SOURCE = source;
-		E2E_Tradeserver.TS_CURRENCY = currency;	
-	}
-	
 	public String getTSTradeRecordId(String tsTradeId) {
 		
 		E2E_Utility utility = new E2E_Utility();
 		String washedTradeId = utility.washName(tsTradeId);
-		return TS_CURRENCY + "_CM_TRADE_" + TS_SOURCE + "_" + washedTradeId;
+		return SetServerSourceCurrency.TRADESERVER_SOURCE + "_CM_TRADE_" + SetServerSourceCurrency.TRADESERVER_CURRENCY + "_" + washedTradeId;
 	}
 	
 	/**
@@ -42,16 +32,15 @@ public class E2E_Tradeserver {
 	@RobotKeyword
 	public void verifyTradeserverFields(String tradeId, Object... fieldValuePairs) throws Exception {
 
-		//String cmTradeRecordName = getTSTradeRecordId(tradeId);
 		E2E_Utility utility = new E2E_Utility();
 		E2E_PXE pxe = new E2E_PXE();
 		String washedTradeId = utility.washName(tradeId);
 		
 		htmlLogger.info(washedTradeId);
 		htmlLogger.info("Length of arg list is " + fieldValuePairs.length);
-		htmlLogger.info(TS_SOURCE + " " + TS_CURRENCY);
+		htmlLogger.info(SetServerSourceCurrency.TRADESERVER_SOURCE + " " + SetServerSourceCurrency.TRADESERVER_CURRENCY);
 		
-		String recName1 = recordRepository.recordDefine(TS_SOURCE, "CM_TRADEHISTORY", TS_CURRENCY, washedTradeId);
+		String recName1 = recordRepository.recordDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, washedTradeId);
 		recordRepository.recordSetTimeout(recName1, "10s");		
 		IReadableRecord readableRecord = recordRepository.recordVerifyFields(recName1, new Object[] {"Id", "==", "\"" + tradeId + "\""}); 
 		recordRepository.recordSubscribe(recName1);
@@ -71,7 +60,7 @@ public class E2E_Tradeserver {
 		}
 		
 		
-		String recName2 = recordRepository.recordDefine(TS_SOURCE, "CM_TRADEHISTORY", TS_CURRENCY, washedTradeId);
+		String recName2 = recordRepository.recordDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, washedTradeId);
 		recordRepository.recordSetTimeout(recName2, "5s");
 		recordRepository.recordVerifyFields(recName2, fieldValuePairs);
 		recordRepository.recordSubscribe(recName2);

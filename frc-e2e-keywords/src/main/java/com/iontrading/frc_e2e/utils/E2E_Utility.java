@@ -28,7 +28,7 @@ public class E2E_Utility {
     	this.valueTypeEnum.put("DiscountMargin", 64);
     }
     
-    public Integer getValueTypeInt(Integer valueTypeStr) {
+    public Integer getValueTypeInt(String valueTypeStr) {
     	return this.valueTypeEnum.get(valueTypeStr);
     }
 
