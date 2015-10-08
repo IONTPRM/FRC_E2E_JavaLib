@@ -31,7 +31,7 @@ public class E2E_Tradeentry {
 	 * @throws Exception
 	 */
 	@RobotKeyword
-	public String createManualTrade(String instrId, String bookId, Double value, String valueType, String verbStr, Double qty) throws Exception {
+	public String createManualTrade(String createUserId, String instrId, String bookId, Double value, String valueType, String verbStr, Double qty) throws Exception {
 		
 		E2E_Utility utility = new E2E_Utility();
 		
@@ -49,7 +49,7 @@ public class E2E_Tradeentry {
 		htmlLogger.info("TradeentryAction record id is " + teActionRecId);
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
-		Object[] transFieldValuePairs1 = new Object[] {"CreateUserId", "mkv", "InstrumentId", instrId};
+		Object[] transFieldValuePairs1 = new Object[] {"CreateUserId", createUserId, "InstrumentId", instrId};
 		transRep.transactionSetFieldsValues(transFieldValuePairs1);
 		transRep.transactionSetTimeout("5s");
 		transRep.transactionVerifyReturn("0", "OK");
