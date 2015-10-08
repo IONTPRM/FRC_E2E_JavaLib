@@ -30,7 +30,7 @@ public class E2E_Tradeserver {
 	 * @throws Exception
 	 */
 	@RobotKeyword
-	public void verifyTradeserverFields(String tradeId, Object... fieldValuePairs) throws Exception {
+	public void verifyTradeserverFields(String tradeId, Object[] fieldValuePairs) throws Exception {
 
 		E2E_Utility utility = new E2E_Utility();
 		E2E_PXE pxe = new E2E_PXE();

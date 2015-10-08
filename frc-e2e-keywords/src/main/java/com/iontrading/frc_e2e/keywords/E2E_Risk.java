@@ -20,7 +20,7 @@ public class E2E_Risk {
 	 * @throws Exception
 	 */
 	@RobotKeyword
-	public void verifyRiskFields(String bookId, String instrId, String tradeId, Object... fieldValuePairs) throws Exception {
+	public void verifyRiskFields(String bookId, String instrId, String tradeId, Object[] fieldValuePairs) throws Exception {
 
 		E2E_Utility utility = new E2E_Utility();
 		String washedTradeId = utility.washName(tradeId);

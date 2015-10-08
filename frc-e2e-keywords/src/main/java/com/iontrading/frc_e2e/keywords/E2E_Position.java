@@ -21,7 +21,7 @@ public class E2E_Position {
 	 * @throws Exception
 	 */
 	@RobotKeyword	
-	public void verifyPositionFields(String bookId, String instrId, String tradeId, Object... fieldValuePairs) throws Exception {
+	public void verifyPositionFields(String bookId, String instrId, String tradeId, Object[] fieldValuePairs) throws Exception {
 
 		E2E_Utility utility = new E2E_Utility();
 		String washedTradeId = utility.washName(tradeId);

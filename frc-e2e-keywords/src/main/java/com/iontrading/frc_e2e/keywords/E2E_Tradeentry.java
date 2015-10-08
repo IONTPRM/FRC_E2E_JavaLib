@@ -35,10 +35,8 @@ public class E2E_Tradeentry {
 		
 		E2E_Utility utility = new E2E_Utility();
 		
-		int verb = 0;
-		if (verbStr.equals("Buy")) {
-			verb = 1;
-		} else if (verbStr.equals("Sell")) {
+		int verb = 1;
+		if (verbStr.equals("Sell")) {
 			verb = 2;
 		}
 		

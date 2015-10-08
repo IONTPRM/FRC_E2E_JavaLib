@@ -45,7 +45,6 @@ public class SetServerSourceCurrency {
 
 		TRADEENTRY_SOURCE = source;
 		TRADEENTRY_CURRENCY = currency;
-
 	}
 	
 	@RobotKeyword
