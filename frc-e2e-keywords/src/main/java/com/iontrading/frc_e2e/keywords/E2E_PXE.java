@@ -48,7 +48,7 @@ public class E2E_PXE {
 	@RobotKeyword
 	public void loginToPXE(String user, String password) throws Exception {
 		
-		Object[] args = new Object[] {"user", user, "Pwd", password};
+		Object[] args = new Object[] {"User", user, "Pwd", password};
 		funcRep.functionDefine(SetServerSourceCurrency.PXE_SOURCE, "VCMILogin", args);
 		funcRep.functionSetTimeout("5s");
 		funcRep.functionVerifyReturn("0", "OK");
@@ -68,7 +68,7 @@ public class E2E_PXE {
 	@RobotKeyword
 	public void logoutFromPXE(String user) throws Exception {
 		
-		Object[] args = new Object[] {"user", user};
+		Object[] args = new Object[] {"User", user};
 		funcRep.functionDefine(SetServerSourceCurrency.PXE_SOURCE, "VCMILogout", args);
 		funcRep.functionSetTimeout("5s");
 		funcRep.functionVerifyReturn("0", "OK");
