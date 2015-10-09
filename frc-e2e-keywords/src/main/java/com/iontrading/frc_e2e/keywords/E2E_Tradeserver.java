@@ -10,8 +10,6 @@ import com.iontrading.robotframework.keywords2.MkvRecordRepository;
 @RobotKeywords
 public class E2E_Tradeserver {
 
-    public static final String ROBOT_LIBRARY_DOC_FORMAT = "HTML";
-
     private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Tradeserver.class.getName());
     	
 	private final MkvRecordRepository recordRepository = new MkvRecordRepository();  
