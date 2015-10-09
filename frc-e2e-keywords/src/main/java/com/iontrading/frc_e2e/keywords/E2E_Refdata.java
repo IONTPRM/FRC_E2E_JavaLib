@@ -21,7 +21,7 @@ public class E2E_Refdata {
 	 * @throws Exception
 	 */
 	@RobotKeyword
-	public String getInstrumentIdOfImportedImported(String bbgSource, String extInstrId) throws Exception {
+	public String getInstrumentIdOfImportedInstrument(String bbgSource, String extInstrId) throws Exception {
 		String instrMappingRecName = bbgSource+"_"+extInstrId; 
 		String recName1 = recordRepository.recordDefine(SetServerSourceCurrency.REFDATA_SOURCE, "INSTRUMENTMAPPING", SetServerSourceCurrency.REFDATA_CURRENCY, instrMappingRecName);
 		recordRepository.recordSetTimeout(recName1, "5s");
