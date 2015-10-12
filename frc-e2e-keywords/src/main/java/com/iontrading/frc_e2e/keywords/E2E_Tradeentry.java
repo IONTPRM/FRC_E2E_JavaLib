@@ -20,7 +20,8 @@ public class E2E_Tradeentry {
 	private final TransactionRepository transRep = new TransactionRepository();
 	
 	/**
-	 * This keyword creates a single leg trade using tradeentry and returns trade id
+	 * 
+	 * @param createUserId
 	 * @param instrId
 	 * @param bookId
 	 * @param value

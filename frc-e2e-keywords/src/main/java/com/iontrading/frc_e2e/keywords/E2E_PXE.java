@@ -183,8 +183,10 @@ public class E2E_PXE {
 			fieldValueFromPXE = result.getDouble(anlPYCalcFuncResFieldValuePos.get(fieldNameToGetValue)).toString();
 		} else if (fieldNameToGetValue.equals("DateSettl") || fieldNameToGetValue.equals("AccruedDays")) {
 			fieldValueFromPXE = result.getInteger(anlPYCalcFuncResFieldValuePos.get(fieldNameToGetValue)).toString();
-		} else {
-			return "";
+		}
+		
+		if (fieldValueFromPXE.equals("NaN")) {
+			fieldValueFromPXE = "0";
 		}
 		
 		return fieldValueFromPXE;
