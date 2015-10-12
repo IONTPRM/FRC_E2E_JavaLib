@@ -8,14 +8,7 @@ import org.robotframework.javalib.annotation.*;
 
 @RobotKeywords
 public class E2E_Utility {
-	/**
-    * Only one instance of this library is created during the whole test execution and it
-    * is shared by all test cases and test suites.
-    */
-    public static final String ROBOT_LIBRARY_SCOPE = "GLOBAL";
-    public static final String ROBOT_LIBRARY_VERSION = "1.0.0";
-    public static final String ROBOT_LIBRARY_DOC_FORMAT = "HTML";
-    
+   
     public HashMap<String, Integer> valueTypeEnum = new HashMap<String, Integer>();
 
     public E2E_Utility() {

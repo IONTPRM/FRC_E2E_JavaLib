@@ -50,10 +50,10 @@ public class E2E_Tradeserver {
 		recordRepository.recordClose(recName1);
 		
 		for (int i=0; i < fieldValuePairs.length; i++) {
-			htmlLogger.info("Reached for loop for fieldValuePairs" + fieldValuePairs[i].toString());
 			if (fieldValuePairs[i].equals("value_ret_by_pxe")) {
 				htmlLogger.info("Inside if condition, " + fieldValuePairs[i].toString());
 				fieldValuePairs[i] = pxe.getValueUsingAnlpycalcFunc(fieldValuePairs[i-1].toString(), instrumentId, value, valueType, dateSettl);
+				htmlLogger.info("Value returned by PXE for value_ret_by_pxe is " + fieldValuePairs[i].toString());
 			}
 		}
 		
