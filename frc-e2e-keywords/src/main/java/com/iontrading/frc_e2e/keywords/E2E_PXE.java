@@ -9,7 +9,6 @@ import org.robotframework.javalib.annotation.RobotKeywords;
 import com.iontrading.frc_e2e.utils.SetServerSourceCurrency;
 import com.iontrading.jmix.subscribe.function.IFunctionCallResult;
 import com.iontrading.robotframework.keywords2.FunctionRepository;
-import com.iontrading.robotframework.base.IReadableRecord;
 import com.iontrading.robotframework.keywords2.MkvRecordRepository;
 import com.iontrading.robotframework.keywords2.TransactionRepository;
 

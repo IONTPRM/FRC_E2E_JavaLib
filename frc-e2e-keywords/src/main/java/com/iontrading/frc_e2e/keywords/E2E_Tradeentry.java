@@ -6,17 +6,14 @@ import com.iontrading.frc_e2e.utils.*;
 
 import com.iontrading.jmix.subscribe.function.IFunctionCallResult;
 import com.iontrading.robotframework.keywords2.FunctionRepository;
-import com.iontrading.robotframework.base.IReadableRecord;
-import com.iontrading.robotframework.keywords2.MkvRecordRepository;
 import com.iontrading.robotframework.keywords2.TransactionRepository;
 
 @RobotKeywords
 public class E2E_Tradeentry {
 
-    private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Tradeserver.class.getName());
+    private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Tradeentry.class.getName());
 
 	private final FunctionRepository funcRep = new FunctionRepository();
-	private final MkvRecordRepository recordRepository = new MkvRecordRepository();  
 	private final TransactionRepository transRep = new TransactionRepository();
 	
 	/**
