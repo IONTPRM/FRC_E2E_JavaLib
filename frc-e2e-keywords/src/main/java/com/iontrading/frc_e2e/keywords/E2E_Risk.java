@@ -14,10 +14,13 @@ public class E2E_Risk {
 
 	/**
 	 * This keyword verifies PNLDETAILS record fields, we pass instr_id and paired list of fields and values.
-	 * @param instrId
-	 * @param tradeId
-	 * @param fieldValuePairs
-	 * @throws Exception
+	 * 
+	 * *Parameters:*
+	 * 	- _bookId_: Refdata book id in which the trade has been created
+	 * 	- _instrId_: Instrument Id on which the trade has been created
+	 * 	- _tradeId_: Trade Id record in created Tradeserver
+	 * 	- _fieldValuePairs_: List of field name and value pairs to verify on PNLDETAILS record of Risk server 
+	 * 
 	 */
 	@RobotKeyword
 	public void verifyRiskFields(String bookId, String instrId, String tradeId, Object[] fieldValuePairs) throws Exception {

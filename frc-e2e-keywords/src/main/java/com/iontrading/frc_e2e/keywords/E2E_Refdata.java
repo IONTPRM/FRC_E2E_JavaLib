@@ -15,10 +15,14 @@ public class E2E_Refdata {
 	/**
 	 * It returns the Refdata instrument id of the imported instrument.
 	 * It requires id of external instrument published by external source.
-	 * @param bbgSource
-	 * @param extInstrId
-	 * @return
-	 * @throws Exception
+	 * 
+	 * *Parameters:*
+	 * 	- _bbgSource_: Source of BloombergMData component (it can be a custom publisher of Dplayer playing BBGMData recording)
+	 * 	- _extInstrId_: Id of external instrument being published by BBGMData component
+	 * 
+	 * *Returns:*
+	 * 	- _wfInstrId_: Id of instrument record created in Refdata on importing the BBGMData instrument
+	 * 
 	 */
 	@RobotKeyword
 	public String getInstrumentIdOfImportedInstrument(String bbgSource, String extInstrId) throws Exception {

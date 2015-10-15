@@ -104,8 +104,6 @@ public class E2E_PXE {
 		transRep.transactionSetTimeout("5s");
 		transRep.transactionVerifyReturn("0", "0:OK");
 		transRep.transactionCall();
-		
-		
 	}
 	
 	/**
@@ -155,7 +153,7 @@ public class E2E_PXE {
 	 * @param value
 	 * @param valueType
 	 * @param dateSettl
-	 * @return
+	 * @return fieldValueFromPXE
 	 * @throws Exception
 	 */
 	public String getValueUsingAnlpycalcFunc(String fieldNameToGetValue, String instrumentId, Double value, Integer valueType, Integer dateSettl) throws Exception {
@@ -192,8 +190,8 @@ public class E2E_PXE {
 	}
 	
 	/**
-	 * This keyword perform transaction on FeedToPXE1 field of Refdata instrument record which was fed to PXE earlier. 
-	By setting FeedToPXE1 to 0, this instrument is removed from PXE tables.
+	 * This keyword perform transaction on FeedToPXE1 field of Refdata instrument record which was fed to PXE earlier. By setting FeedToPXE1 to 0, this instrument is removed from PXE tables.
+	 * 	
 	 * @param instrIdList
 	 * @throws Exception 
 	 */

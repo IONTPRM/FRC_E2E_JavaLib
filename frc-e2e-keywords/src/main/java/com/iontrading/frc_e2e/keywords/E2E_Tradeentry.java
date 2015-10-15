@@ -1,5 +1,6 @@
 package com.iontrading.frc_e2e.keywords;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.robotframework.javalib.annotation.*;
 
 import com.iontrading.frc_e2e.utils.*;
@@ -17,19 +18,23 @@ public class E2E_Tradeentry {
 	private final TransactionRepository transRep = new TransactionRepository();
 	
 	/**
+	 * Creates voice/manual trade using Tradeentry component
 	 * 
-	 * @param createUserId
-	 * @param instrId
-	 * @param bookId
-	 * @param value
-	 * @param valueType
-	 * @param verbStr
-	 * @param qty
-	 * @return
-	 * @throws Exception
+	 * *Parameters:*
+	 * 	- _createUserId_: User id to create the trade
+	 * 	- _instrId_: Refdata Instrument id
+	 * 	- _bookId_: A valid book id from Refdata 
+	 * 	- _value_: Value to create trade with
+	 * 	- _valueType_: Value Type, for example Price, Yield, Discount, DiscountMargin etc
+	 * 	- _verbStr_: Verb for trade, Buy/Sell
+	 * 	- _qty_: Qty for trade
+	 * 	- _fieldValuePairs_: List of optional field name and value pairs
+	 * 
+	 * *Returns:* It returns the trade record id created in Tradeserver
+	 *  	
 	 */
 	@RobotKeyword
-	public String createManualTrade(String createUserId, String instrId, String bookId, Double value, String valueType, String verbStr, Double qty) throws Exception {
+	public String createManualTrade(String createUserId, String instrId, String bookId, Double value, String valueType, String verbStr, Double qty, Object[] fieldValuePairs) throws Exception {
 		
 		E2E_Utility utility = new E2E_Utility();
 		
@@ -55,7 +60,8 @@ public class E2E_Tradeentry {
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
 		Object[] transFieldValuePairs2 = new Object[] {"Value", value, "ValueType", utility.getValueTypeInt(valueType), "Verb", verb, "Qty", qty, "BookId", bookId, "RecalcFlag", "1"};
-		transRep.transactionSetFieldsValues(transFieldValuePairs2);
+		Object[] args = ArrayUtils.addAll(transFieldValuePairs2, fieldValuePairs);
+		transRep.transactionSetFieldsValues(args);
 		transRep.transactionSetTimeout("5s");
 		transRep.transactionVerifyReturn("0", "OK");
 		transRep.transactionCall();
