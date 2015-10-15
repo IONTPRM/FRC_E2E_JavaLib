@@ -23,9 +23,14 @@ public class E2E_Tradeserver {
 	
 	/**
 	 * Keyword to verify fields' values on trade record in Tradeserver
-	 * @param tradeId
-	 * @param fieldValuePairs
-	 * @throws Exception
+	 * 
+	 * *Parameters:*
+	 * 	- _tradeId_: Id of trade record created in Tradeserver
+	 * 	- _fieldValuePairs_: List of field name and field value pairs
+	 * 
+	 * *Example:*
+	 * 	| Verify Tradeserver Fields | 278942.0 | Price | 99.25 | Qty | 2 | TradeStatusStr | Open | Yield | value_ret_by_pxe |
+	 * 	Here value_ret_by_pxe is the literal string for the fields which value Tradeserver received from PXE
 	 */
 	@RobotKeyword
 	public void verifyTradeserverFields(String tradeId, Object[] fieldValuePairs) throws Exception {
@@ -51,13 +56,10 @@ public class E2E_Tradeserver {
 		
 		for (int i=0; i < fieldValuePairs.length; i++) {
 			if (fieldValuePairs[i].equals("value_ret_by_pxe")) {
-				htmlLogger.info("Inside if condition, " + fieldValuePairs[i].toString());
 				fieldValuePairs[i] = pxe.getValueUsingAnlpycalcFunc(fieldValuePairs[i-1].toString(), instrumentId, value, valueType, dateSettl);
-				htmlLogger.info("Value returned by PXE for value_ret_by_pxe is " + fieldValuePairs[i].toString());
 			}
 		}
-		
-		
+				
 		String recName2 = recordRepository.recordDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, washedTradeId);
 		recordRepository.recordSetTimeout(recName2, "5s");
 		recordRepository.recordVerifyFields(recName2, fieldValuePairs);

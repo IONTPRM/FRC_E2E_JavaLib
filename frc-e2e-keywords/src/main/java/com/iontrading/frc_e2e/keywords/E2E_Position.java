@@ -14,10 +14,13 @@ public class E2E_Position {
 	
 	/**
 	 * This keyword verifies POSITIONDETAILS record fields, we pass instr_id and paired list of fields and values.
-	 * @param bookId
-	 * @param instrId
-	 * @param tradeId
-	 * @param fieldValuePairs
+	 * 
+	 * *Parameters:*
+	 * 	- _bookId_: Refdata book id in which the trade has been created
+	 * 	- _instrId_: Instrument Id on which the trade has been created
+	 * 	- _tradeId_: Trade Id record in created Tradeserver
+	 * 	- _fieldValuePairs_: List of field name and value pairs to verify on POSITIONDETAILS record of Position server 
+	 * 
 	 * @throws Exception
 	 */
 	@RobotKeyword	
@@ -41,7 +44,5 @@ public class E2E_Position {
 		recordRepository.recordVerifyFields(recName2, fieldValuePairs); 
 		recordRepository.recordSubscribe(recName2);
 		recordRepository.recordClose(recName2);
-		
-		
 	}
 }
