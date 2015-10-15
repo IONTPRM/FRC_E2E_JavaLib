@@ -28,6 +28,29 @@ public class E2E_GatewayTrades {
 	private static final ILogger logger = new MkvLibraryLogFactory().createLogger();
 	private static MkvRecordRepository recordRep = new MkvRecordRepository();
 
+	
+	/**
+	 * *Description:* This keyword is required to login in to the gateway
+	 *
+	 * *Parameters:*
+	 *  - *gatewaySource:* gateway source name
+	 *  - *userName:* user login name
+	 *  - *password:* user login password
+	 *   - *fvlist:* list of optional params in field-value pair
+	 *
+	 * *Usage:*
+	 * 		| performVCMILogin | ESPEED	| DEMO1	| DEMO1 |
+	 * 		| performVCMILogin | ESPEED	| DEMO1	| DEMO1 | freeText | loginuser |
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "<OK>"
+	 * 		- *For Example:* Ok
+	 *
+	 * 	 - *On Failure:* "<Error message returned by the Gateway>"
+	 *   	- *For Example:* Invalid User Name.
+	 *
+	 */
 	@RobotKeyword
 	public IFunctionCallResult performVCMILogin(String gatewaySource, String userName, String password,Object[] fvlist )
 	throws Exception {
@@ -43,6 +66,25 @@ public class E2E_GatewayTrades {
 		return fResult;
 	}
 
+	/**
+	 * *Description:* This keyword is required to logout from gateway
+	 *
+	 * *Parameters:*
+	 *  - *gatewaySource:* gateway source name
+	 *  - *userName:* user login name
+	 *
+	 * *Usage:*
+	 * 		| performVCMILogout | ESPEED	| DEMO1 |	
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "<OK>"
+	 * 		- *For Example:* Ok
+	 *
+	 * 	 - *On Failure:* "<Error message returned by the Gateway>"
+	 *   	- *For Example:* User does not exist.
+	 *
+	 */
 	@RobotKeyword
 	public IFunctionCallResult performVCMILogout(String gatewaySource, String password)
 	throws Exception {
@@ -56,6 +98,29 @@ public class E2E_GatewayTrades {
 		return fResult;
 	}
 
+	/**
+	 * *Description:* This keyword is required to set the trader status for the gateway
+	 *
+	 * *Parameters:*
+	 *  - *gatewaySource:* gateway source name
+	 *  - *gatewayCurrency:* gateway currency
+	 *   - *userName:* user login name
+	 *   - *traderStatus:* traderStatus (On/Off)
+	 *  
+	 *
+	 * *Usage:*
+	 * 		| setTraderStatus | ESPEED	| EUR | DEMO1 | On |
+	 * 		| setTraderStatus | ESPEED	| EUR | DEMO1 | Off |	
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "0:OK"
+	 * 		- *For Example:* Ok
+	 *
+	 * 	 - *On Failure:* "<Error message returned by the Gateway>"
+	 *   	- *For Example:* User not logged in.
+	 *
+	 */
 	@RobotKeyword
 	public String setTraderStatus(String gatewaySource,String gatewayCurrency, String userName, String traderStatus)
 	throws Exception {
@@ -68,6 +133,22 @@ public class E2E_GatewayTrades {
 		return response;
 	}
 
+	/**
+	 * *Description:* This keyword is required to add order on the gateway and return order id.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| addOrder | ESPEED| DEMO1| T10181| Buy| 10| 100| 100 | LIMIT | FAS | 0 | 0 | ${EMPTY}| ${EMPTY}| 0| ${EMPTY}| 0 | Opt_Params |
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 * 		- *For Example:*  OK -Result {-Id {ID_41_16142193} -OrderTmpId {MKV_T10181_1443607023044} }
+	 *
+	 * 	 - *On Failure:* "<Error message returned by the Gateway>"
+	 *   	- *For Example:* Type not defined.
+	 *
+	 */
 	@RobotKeyword
 	public String addOrder(String gatewaySource,String userName,String instrId,String verb,double price,double qtyShown,double qtyTot,String orderType,String timeInForce,int isSoft,int attributeId, String customerInfo,String freeText,int stopCondition,String stopId,double stopPrice,Object[] optParams)
 	throws Exception {

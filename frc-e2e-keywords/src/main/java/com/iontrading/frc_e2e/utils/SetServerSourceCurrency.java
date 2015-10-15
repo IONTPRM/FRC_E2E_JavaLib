@@ -19,6 +19,10 @@ public class SetServerSourceCurrency {
 	public static String POSITION_CURRENCY;
 	public static String RISK_SOURCE;
 	public static String RISK_CURRENCY;
+	public static String STPSERVER_SOURCE;
+	public static String STPSERVER_CURRENCY;
+	
+	
 	
 	public static String TIMEOUT_S;
 	public static String TIMEOUT_M;
@@ -118,5 +122,17 @@ public class SetServerSourceCurrency {
 
 		RISK_SOURCE = source;
 		RISK_CURRENCY = currency;		
+	}
+	
+	/**
+	 * 
+	 * @param source
+	 * @param currency
+	 */
+	@RobotKeyword
+	public void setSTPSourceCurrency(String source, String currency) {
+
+		STPSERVER_SOURCE = source;
+		STPSERVER_CURRENCY = currency;		
 	}
 }
