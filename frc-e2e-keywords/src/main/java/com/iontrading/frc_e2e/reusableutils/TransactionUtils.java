@@ -43,7 +43,7 @@ public class TransactionUtils
 		htmlLogger.info("error msg :"+tResult.getErrMessage().contains("OK"));
 
 		if ((tResult.getErrCode() != 0) || (!tResult.getErrMessage().contains("OK"))) {
-			throw new ResultNotMatchesException("Result: " + tResult.getErrMessage());
+			throw new ResultNotMatchesException("Result: " + tResult.getErrMessage());//|| (!tResult.getErrMessage().contains("Ok"))
 		}
 		return tResult.getErrMessage();
 	}
