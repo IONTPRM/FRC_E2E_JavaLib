@@ -5,17 +5,25 @@ import org.robotframework.javalib.annotation.*;
 
 import com.iontrading.frc_e2e.utils.*;
 
+import com.iontrading.robot.DPlayerKey;
+
 import com.iontrading.jmix.subscribe.function.IFunctionCallResult;
 import com.iontrading.robotframework.keywords2.FunctionRepository;
 import com.iontrading.robotframework.keywords2.TransactionRepository;
 
 @RobotKeywords
 public class E2E_Tradeentry {
-
+	
     private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Tradeentry.class.getName());
 
 	private final FunctionRepository funcRep = new FunctionRepository();
 	private final TransactionRepository transRep = new TransactionRepository();
+	private final DPlayerKey dplayerKey;
+
+	public E2E_Tradeentry() throws Exception {
+		dplayerKey = new DPlayerKey("0", "AUTOROBOT");
+	}
+	
 	
 	/**
 	 * Creates voice/manual trade using Tradeentry component
@@ -52,11 +60,13 @@ public class E2E_Tradeentry {
 		htmlLogger.info("TradeentryAction record id is " + teActionRecId);
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
-		Object[] transFieldValuePairs1 = new Object[] {"CreateUserId", createUserId, "InstrumentId", instrId};
+		Object[] transFieldValuePairs1 = new Object[] {"CreateUserId", createUserId, "InstrumentId", instrId, "Value", value, "ValueType", utility.getValueTypeInt(valueType)};
 		transRep.transactionSetFieldsValues(transFieldValuePairs1);
 		transRep.transactionSetTimeout("5s");
 		transRep.transactionVerifyReturn("0", "OK");
 		transRep.transactionCall();
+		
+		dplayerKey.DPlayer("Wait For Sec", new Object[] {"1"});
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
 		Object[] transFieldValuePairs2 = new Object[] {"Value", value, "ValueType", utility.getValueTypeInt(valueType), "Verb", verb, "Qty", qty, "BookId", bookId, "RecalcFlag", "1"};

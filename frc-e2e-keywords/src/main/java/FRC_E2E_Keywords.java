@@ -10,7 +10,7 @@ public class FRC_E2E_Keywords extends AnnotationLibrary {
 	public static final String ROBOT_LIBRARY_VERSION = "1.0.0";
 	public static final String ROBOT_LIBRARY_DOC_FORMAT = "HTML";
 
-	public FRC_E2E_Keywords() {
+	public FRC_E2E_Keywords() throws Exception {
   	    super("com/iontrading/frc_e2e/**/**.class");
 	}
 	
