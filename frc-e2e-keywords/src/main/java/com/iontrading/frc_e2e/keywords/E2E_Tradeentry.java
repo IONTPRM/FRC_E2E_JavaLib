@@ -66,7 +66,7 @@ public class E2E_Tradeentry {
 		transRep.transactionVerifyReturn("0", "OK");
 		transRep.transactionCall();
 		
-		dplayerKey.DPlayer("Wait For Sec", new Object[] {"1"});
+		dplayerKey.DPlayer("Wait For Sec", new Object[] {5});
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
 		Object[] transFieldValuePairs2 = new Object[] {"Value", value, "ValueType", utility.getValueTypeInt(valueType), "Verb", verb, "Qty", qty, "BookId", bookId, "RecalcFlag", "1"};
