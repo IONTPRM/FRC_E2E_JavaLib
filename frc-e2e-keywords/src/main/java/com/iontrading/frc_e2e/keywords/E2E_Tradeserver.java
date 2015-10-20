@@ -84,6 +84,7 @@ public class E2E_Tradeserver {
 		chainRep.chainSetTimeout(chainName1, SetServerSourceCurrency.TIMEOUT_L);
 		IReadableRecord recObj = chainRep.chainVerifyRecord(chainName1, new Object[] {"ExternalIdSrc1", "==", extGwySrc, "OrderId", "==", gwyOrderId});
 		chainRep.chainSubscribeWaitingSnapshotRecords(chainName1);
+		htmlLogger.info("Full record name is = " + recObj.getRecordName());
 		String tradeId = (String) recObj.getFieldValue("Id");
 		chainRep.chainClose(chainName1);
 		
