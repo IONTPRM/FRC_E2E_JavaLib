@@ -39,9 +39,8 @@ public class E2E_Stpserver {
 	public void removeGatewaySourceInSTP(String gatewaySource)
 	throws Exception {
 		IFunctionCallResult funcRes = null;
-		String response = null;		
 		Object[] args=new Object [] {"Source",gatewaySource};
-		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.STPSERVER_SOURCE, "InsertStpSource", SetServerSourceCurrency.TIMEOUT_M,args );
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.STPSERVER_SOURCE, "RemoveStpSource", SetServerSourceCurrency.TIMEOUT_M,args );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());	
 	}
 	

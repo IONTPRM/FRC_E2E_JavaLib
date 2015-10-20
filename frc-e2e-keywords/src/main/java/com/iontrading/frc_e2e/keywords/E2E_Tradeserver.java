@@ -13,8 +13,8 @@ public class E2E_Tradeserver {
 
     private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Tradeserver.class.getName());
     	
-	private final MkvRecordRepository recordRepository = new MkvRecordRepository();
-	private final ChainRepository chainRepository = new ChainRepository();
+	private final MkvRecordRepository recordRep = new MkvRecordRepository();
+	private final ChainRepository chainRep = new ChainRepository();
 		
 	public String getTSTradeRecordId(String tsTradeId) {
 		
@@ -45,16 +45,16 @@ public class E2E_Tradeserver {
 		htmlLogger.info("Length of arg list is " + fieldValuePairs.length);
 		htmlLogger.info(SetServerSourceCurrency.TRADESERVER_SOURCE + " " + SetServerSourceCurrency.TRADESERVER_CURRENCY);
 		
-		String recName1 = recordRepository.recordDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, washedTradeId);
-		recordRepository.recordSetTimeout(recName1, "10s");		
-		IReadableRecord readableRecord = recordRepository.recordVerifyFields(recName1, new Object[] {"Id", "==", "\"" + tradeId + "\""}); 
-		recordRepository.recordSubscribe(recName1);
+		String recName1 = recordRep.recordDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, washedTradeId);
+		recordRep.recordSetTimeout(recName1, "10s");		
+		IReadableRecord readableRecord = recordRep.recordVerifyFields(recName1, new Object[] {"Id", "==", "\"" + tradeId + "\""}); 
+		recordRep.recordSubscribe(recName1);
 				
 		String instrumentId = (String) readableRecord.getFieldValue("InstrumentId");
 		Double value = (Double) readableRecord.getFieldValue("Value");
 		Integer valueType = (Integer) readableRecord.getFieldValue("ValueType");
 		Integer dateSettl = (Integer) readableRecord.getFieldValue("DateSettl");
-		recordRepository.recordClose(recName1);
+		recordRep.recordClose(recName1);
 		
 		for (int i=0; i < fieldValuePairs.length; i++) {
 			if (fieldValuePairs[i].equals("value_ret_by_pxe")) {
@@ -62,11 +62,11 @@ public class E2E_Tradeserver {
 			}
 		}
 				
-		String recName2 = recordRepository.recordDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, washedTradeId);
-		recordRepository.recordSetTimeout(recName2, "5s");
-		recordRepository.recordVerifyFields(recName2, fieldValuePairs);
-		recordRepository.recordSubscribe(recName2);
-		recordRepository.recordClose(recName2);
+		String recName2 = recordRep.recordDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, washedTradeId);
+		recordRep.recordSetTimeout(recName2, "5s");
+		recordRep.recordVerifyFields(recName2, fieldValuePairs);
+		recordRep.recordSubscribe(recName2);
+		recordRep.recordClose(recName2);
 	
 	}
 
@@ -80,11 +80,12 @@ public class E2E_Tradeserver {
 	@RobotKeyword
 	public String getTSTradeIdFromSTPProcessedTrades(String extGwySrc, String gwyOrderId) throws Exception {
 
-		String chainName1 = chainRepository.chainDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, "TRADE");
-		chainRepository.chainSetTimeout(chainName1, SetServerSourceCurrency.TIMEOUT_L);
-		IReadableRecord recObj = chainRepository.chainVerifyRecord(chainName1, new Object[] {"ExternalIdSrc1", "==", extGwySrc, "OrderId", "==", gwyOrderId});
-		chainRepository.chainSubscribeWaitingSnapshotRecords(chainName1);
+		String chainName1 = chainRep.chainDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, "TRADE");
+		chainRep.chainSetTimeout(chainName1, SetServerSourceCurrency.TIMEOUT_L);
+		IReadableRecord recObj = chainRep.chainVerifyRecord(chainName1, new Object[] {"ExternalIdSrc1", "==", extGwySrc, "OrderId", "==", gwyOrderId});
+		chainRep.chainSubscribeWaitingSnapshotRecords(chainName1);
 		String tradeId = (String) recObj.getFieldValue("Id");
+		chainRep.chainClose(chainName1);
 		
 		return tradeId;
 		
