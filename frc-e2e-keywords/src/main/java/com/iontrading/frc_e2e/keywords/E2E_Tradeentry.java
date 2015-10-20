@@ -60,13 +60,14 @@ public class E2E_Tradeentry {
 		htmlLogger.info("TradeentryAction record id is " + teActionRecId);
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
-		Object[] transFieldValuePairs1 = new Object[] {"CreateUserId", createUserId, "InstrumentId", instrId, "Value", value, "ValueType", utility.getValueTypeInt(valueType)};
+		Object[] transFieldValuePairs1 = new Object[] {"CreateUserId", createUserId, "InstrumentId", instrId};
 		transRep.transactionSetFieldsValues(transFieldValuePairs1);
 		transRep.transactionSetTimeout("5s");
 		transRep.transactionVerifyReturn("0", "OK");
 		transRep.transactionCall();
 		
-		dplayerKey.DPlayer("Wait For Sec", new Object[] {5});
+		// Just to wait for 1 second in case ticket is not initialized correctly yet
+		dplayerKey.DPlayer("Wait For Sec", new Object[] {1});
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
 		Object[] transFieldValuePairs2 = new Object[] {"Value", value, "ValueType", utility.getValueTypeInt(valueType), "Verb", verb, "Qty", qty, "BookId", bookId, "RecalcFlag", "1"};
