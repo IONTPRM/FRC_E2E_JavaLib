@@ -6,13 +6,15 @@ import com.iontrading.frc_e2e.utils.*;
 
 import com.iontrading.robotframework.base.IReadableRecord;
 import com.iontrading.robotframework.keywords2.MkvRecordRepository;
+import com.iontrading.robotframework.keywords2.ChainRepository;
 
 @RobotKeywords
 public class E2E_Tradeserver {
 
     private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Tradeserver.class.getName());
     	
-	private final MkvRecordRepository recordRepository = new MkvRecordRepository();  
+	private final MkvRecordRepository recordRepository = new MkvRecordRepository();
+	private final ChainRepository chainRepository = new ChainRepository();
 		
 	public String getTSTradeRecordId(String tsTradeId) {
 		
@@ -68,4 +70,23 @@ public class E2E_Tradeserver {
 	
 	}
 
+	/**
+	 * 
+	 * @param extGwySrc
+	 * @param gwyOrderId
+	 * @return
+	 * @throws Exception
+	 */
+	@RobotKeyword
+	public String getTSTradeIdFromSTPProcessedTrades(String extGwySrc, String gwyOrderId) throws Exception {
+
+		String chainName1 = chainRepository.chainDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, "TRADE");
+		chainRepository.chainSetTimeout(chainName1, SetServerSourceCurrency.TIMEOUT_L);
+		IReadableRecord recObj = chainRepository.chainVerifyRecord(chainName1, new Object[] {"ExternalIdSrc1", "==", extGwySrc, "OrderId", "==", gwyOrderId});
+		chainRepository.chainSubscribeWaitingSnapshotRecords(chainName1);
+		String tradeId = (String) recObj.getFieldValue("Id");
+		
+		return tradeId;
+		
+	}
 }
