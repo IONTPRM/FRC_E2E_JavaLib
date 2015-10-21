@@ -1,9 +1,9 @@
 package com.iontrading.frc_e2e.keywords;
 
+import org.omg.CORBA.portable.ApplicationException;
 import org.robotframework.javalib.annotation.*;
 
 import com.iontrading.frc_e2e.utils.*;
-
 import com.iontrading.robotframework.base.IReadableRecord;
 import com.iontrading.robotframework.keywords2.MkvRecordRepository;
 import com.iontrading.robotframework.keywords2.ChainRepository;
@@ -71,23 +71,42 @@ public class E2E_Tradeserver {
 	}
 
 	/**
+	  * Keyword to reterieve TradeId corresponding to external trade processed by STP
 	 * 
-	 * @param extGwySrc
-	 * @param gwyOrderId
-	 * @return
-	 * @throws Exception
+	 * *Parameters:*
+	 * 	- _extGwySrc: Gateway source which is supplying external trade
+	 * 	- _gwyOrderId: OrderId of the trade to be processed by STP 
+	 * 
+	 * *Example:*
+	 * 	|getTSTradeIdFromSTPProcessedTrades | ESPEED | ID_28_13272331 |
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "TradeId"
+	 * 		- *For Example:* 4031162.0
+	 *
+	 * 	 - *On Failure:* "<Error message returned by the function>"
+	 *   	- *For Example:* Record does not exist .
+	 * @throws Exception 
 	 */
 	@RobotKeyword
 	public String getTSTradeIdFromSTPProcessedTrades(String extGwySrc, String gwyOrderId) throws Exception {
-
+		String recordId=null;
+		String tradeId=null;
 		String chainName1 = chainRep.chainDefine(SetServerSourceCurrency.TRADESERVER_SOURCE, "CM_TRADE", SetServerSourceCurrency.TRADESERVER_CURRENCY, "TRADE");
 		chainRep.chainSetTimeout(chainName1, SetServerSourceCurrency.TIMEOUT_L);
 		IReadableRecord recObj = chainRep.chainVerifyRecord(chainName1, new Object[] {"ExternalIdSrc1", "==", extGwySrc, "OrderId", "==", gwyOrderId});
-		chainRep.chainSubscribeWaitingSnapshotRecords(chainName1);
-		htmlLogger.info("Full record name is = " + recObj.getRecordName());
-		String tradeId = (String) recObj.getFieldValue("Id");
+		htmlLogger.info("Full record name is = " + recObj);
+		try {
+			chainRep.chainSubscribeWaitingSnapshotRecords(chainName1);
+			htmlLogger.info("Snapshot subscribed");
+			recordId=recObj.getRecordName(); //exception is thrown here if ther is no reccord received
+			htmlLogger.info("Full record name is: " + recObj.getRecordName());
+			tradeId = (String) recObj.getFieldValue("Id");
+		} catch (Exception e) {
+			throw new Exception("Record not found in chain : " + e);
+		} finally {
 		chainRep.chainClose(chainName1);
-		
+		}
 		return tradeId;
 		
 	}
