@@ -92,4 +92,39 @@ public class E2E_Tradeentry {
 		
 		return tradeId;
 	}
+	
+	@RobotKeyword
+	public String matchSalesTrade(String salesTradeId, String bookId) throws Exception {
+		
+		funcRep.functionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "MatchTrade");
+		funcRep.functionSetTimeout(SetServerSourceCurrency.TIMEOUT_M);
+		funcRep.functionVerifyRetCode(0);
+		IFunctionCallResult createTradeFuncResult = funcRep.functionCall();
+		String teActionRecId = createTradeFuncResult.getErrorMessage();
+
+		htmlLogger.info("TradeentryAction record id is " + teActionRecId);
+		
+		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
+		Object[] transFieldValuePairs1 = new Object[] {"BookId", bookId};
+		transRep.transactionSetFieldsValues(transFieldValuePairs1);
+		transRep.transactionSetTimeout(SetServerSourceCurrency.TIMEOUT_S);
+		transRep.transactionVerifyReturn("0", "OK");
+		transRep.transactionCall();
+
+		String tradeId;
+		funcRep.functionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "SaveTrade", new Object[] {"RecordId", teActionRecId});
+		funcRep.functionSetTimeout(SetServerSourceCurrency.TIMEOUT_M);
+		IFunctionCallResult saveTradeFuncResult = funcRep.functionCall();
+		
+		if (saveTradeFuncResult.getErrorCode() != 0) {
+			throw new Exception("Trade could not be created, SaveTrade returned error message: " + saveTradeFuncResult.getErrorMessage()); 
+		}
+		
+		tradeId = saveTradeFuncResult.getErrorMessage();
+		
+		htmlLogger.info("Tradeserver trade record id " + tradeId);
+		
+		return tradeId;
+	}
+	
 }
