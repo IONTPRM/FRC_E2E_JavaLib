@@ -6,10 +6,16 @@ import java.util.regex.Matcher;
 
 import org.robotframework.javalib.annotation.*;
 
+import com.iontrading.robotframework.base.IReadableRecord;
+import com.iontrading.robotframework.keywords2.MkvRecordRepository;
+
 @RobotKeywords
 public class E2E_Utility {
    
     public HashMap<String, Integer> valueTypeEnum = new HashMap<String, Integer>();
+    private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Utility.class.getName());
+    private static MkvRecordRepository recordRep = new MkvRecordRepository();
+    
 
     public E2E_Utility() {
     	this.valueTypeEnum.put("Price", 1);
@@ -60,4 +66,23 @@ public class E2E_Utility {
 		return extInstrId;
 	}
 	
+	@RobotKeyword
+	public static void verifyRecordDoesnotExist(String source, String currency, String tableName, String recordId)
+		throws Exception {
+		String recordFullName = recordRep.recordDefine(source, tableName, currency, recordId);
+		try
+		{
+			recordRep.recordSetTimeout(recordFullName, SetServerSourceCurrency.TIMEOUT_M);
+			recordRep.recordWaitUnpublish(recordFullName);
+		}
+		catch (Exception e)
+		{
+			throw new Exception("Record " + recordFullName + " exist in the " + tableName + " table.");
+		}
+		finally
+		{
+			recordRep.recordClose(recordFullName);
+		}
+	}
+		
 }
