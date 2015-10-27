@@ -74,9 +74,11 @@ public class E2E_Utility {
 		{
 			recordRep.recordSetTimeout(recordFullName, SetServerSourceCurrency.TIMEOUT_M);
 			recordRep.recordWaitUnpublish(recordFullName);
+			recordRep.recordSubscribe(recordFullName);
 		}
 		catch (Exception e)
 		{
+			htmlLogger.info("Exception thrown by keywoard :" + e);
 			throw new Exception("Record " + recordFullName + " exist in the " + tableName + " table.");
 		}
 		finally
