@@ -96,7 +96,7 @@ public class E2E_Tradeentry {
 	@RobotKeyword
 	public String matchSalesTrade(String salesTradeId, String bookId) throws Exception {
 		
-		funcRep.functionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "MatchTrade");
+		funcRep.functionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "MatchTrade", new Object[] {"Id", salesTradeId});
 		funcRep.functionSetTimeout(SetServerSourceCurrency.TIMEOUT_M);
 		funcRep.functionVerifyRetCode(0);
 		IFunctionCallResult createTradeFuncResult = funcRep.functionCall();
