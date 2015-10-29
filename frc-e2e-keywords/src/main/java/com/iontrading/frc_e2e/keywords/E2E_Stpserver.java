@@ -71,10 +71,10 @@ public class E2E_Stpserver {
 	}
 	
 	@RobotKeyword
-	public void insertFieldMappingInSTP(String gatewaySource,String fieldValue ,int valueType )
+	public void insertFieldMappingInSTP(String gatewaySource,String fieldName ,String fieldValue ,int valueType )
 			throws Exception {
 				IFunctionCallResult funcRes = null;	
-				Object[] args=new Object [] {"Source",gatewaySource,"Field",fieldValue,"ValueType",valueType};
+				Object[] args=new Object [] {"Source",gatewaySource,"Field",fieldName,"Value",fieldValue,"ValueType",valueType};
 				funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.STPSERVER_SOURCE, "InsertFieldMapping", SetServerSourceCurrency.TIMEOUT_M,args );
 				htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 			}
