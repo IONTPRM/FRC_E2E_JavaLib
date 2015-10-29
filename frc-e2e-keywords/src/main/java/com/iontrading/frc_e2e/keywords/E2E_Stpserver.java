@@ -70,4 +70,12 @@ public class E2E_Stpserver {
 		//DefaultBookId	${_BOOKID_1_}	InstrumentMapSource	${GLOBAL_MAPPING_SOURCE}	UseQtyNominal	1
 	}
 	
+	@RobotKeyword
+	public void insertFieldMappingInSTP(String gatewaySource,String fieldValue , Integer valueType )
+			throws Exception {
+				IFunctionCallResult funcRes = null;	
+				Object[] args=new Object [] {"Source",gatewaySource,"Field",fieldValue,"ValueType",valueType};
+				funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.STPSERVER_SOURCE, "InsertFieldMapping", SetServerSourceCurrency.TIMEOUT_M,args );
+				htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+			}
 }
