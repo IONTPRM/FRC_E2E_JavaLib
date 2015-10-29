@@ -71,7 +71,7 @@ public class E2E_Stpserver {
 	}
 	
 	@RobotKeyword
-	public void insertFieldMappingInSTP(String gatewaySource,String fieldValue , Integer valueType )
+	public void insertFieldMappingInSTP(String gatewaySource,String fieldValue ,int valueType )
 			throws Exception {
 				IFunctionCallResult funcRes = null;	
 				Object[] args=new Object [] {"Source",gatewaySource,"Field",fieldValue,"ValueType",valueType};
