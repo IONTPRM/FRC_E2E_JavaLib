@@ -140,4 +140,51 @@ public class E2E_Tradeentry {
 		return tradeId;
 	}
 	
+	/**
+	 * Edit voice/manual trade using Tradeentry component
+	 * 
+	 * *Parameters:*
+	 * 	- _editTradeId_: Trade id to be edited
+	 * 	- _fieldValuePairs_: List of optional field name and value pairs
+	 * 
+	 * *Returns:* It returns the edited trade record id created in Tradeserver
+	 *  	
+	 */
+	@RobotKeyword
+	public String editManualTrade(String editTradeId, Object[] fieldValuePairs) throws Exception {
+		
+		Object[] args=new Object[]{"Id",editTradeId};
+		funcRep.functionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "EditTrade",args);
+		funcRep.functionSetTimeout("5s");
+		funcRep.functionVerifyRetCode(0);
+		IFunctionCallResult createTradeFuncResult = funcRep.functionCall();
+		String teActionRecId = createTradeFuncResult.getErrorMessage();
+
+		htmlLogger.info("TradeentryAction record id is " + teActionRecId);
+		
+		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
+		transRep.transactionSetFieldsValues(fieldValuePairs);
+		transRep.transactionSetTimeout(SetServerSourceCurrency.TIMEOUT_S);
+		transRep.transactionVerifyReturn("0", "OK");
+		transRep.transactionCall();
+		
+		// Just to wait for 1 second in case ticket is not initialized correctly yet
+		dplayerKey.DPlayer("Wait For Sec", new Object[] {1});
+		
+		String tradeId;
+		funcRep.functionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "SaveTrade", new Object[] {"RecordId", teActionRecId});
+		funcRep.functionSetTimeout(SetServerSourceCurrency.TIMEOUT_S);
+		IFunctionCallResult saveTradeFuncResult = funcRep.functionCall();
+		
+		if (saveTradeFuncResult.getErrorCode() != 0) {
+			throw new Exception("Trade could not be edited, SaveTrade returned error message: " + saveTradeFuncResult.getErrorMessage()); 
+		}
+		
+		tradeId = saveTradeFuncResult.getErrorMessage();
+		
+		htmlLogger.info("Tradeserver trade record id " + tradeId);
+		
+		return tradeId;
+	}
+	
 }
