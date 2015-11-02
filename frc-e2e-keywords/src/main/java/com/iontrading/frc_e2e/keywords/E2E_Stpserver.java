@@ -154,11 +154,11 @@ public class E2E_Stpserver {
 			}
 	
 	/**
-	 * *Description:* This keyword is required to insert new STP source in stpserver.
+	 * *Description:* This keyword is required to insert counterparty to be used by STP source in stpserver.
 	 *
 	 *  
 	 * *Usage:*
-	 * 		| InsertGatewaySourceInSTP | ESPEED|
+	 * 		| insertCounterPartyInSTP | ESPEED| 0 | 0| CP1000|1|
 	 *
 	 * *Return Values:*
 	 *

@@ -93,8 +93,20 @@ public class E2E_Tradeentry {
 		return tradeId;
 	}
 	
+	
+	/**
+	 * Match unmatch sales trade using Tradeentry component
+	 * 
+	 * *Parameters:*
+	 * 	- _salesTradeId_: Sales Trade id to be matched
+	 * 	- _bookId_: A valid book id from Refdata 
+	 * 	- _fieldValuePairs_: List of optional field name and value pairs
+	 * 
+	 * *Returns:* It returns the Match trade record id created in Tradeserver
+	 *  	
+	 */
 	@RobotKeyword
-	public String matchSalesTrade(String salesTradeId, String bookId) throws Exception {
+	public String matchSalesTrade(String salesTradeId, String bookId,Object[] fvList) throws Exception {
 		
 		funcRep.functionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "MatchTrade", new Object[] {"Id", salesTradeId});
 		funcRep.functionSetTimeout(SetServerSourceCurrency.TIMEOUT_M);
@@ -105,7 +117,8 @@ public class E2E_Tradeentry {
 		htmlLogger.info("TradeentryAction record id is " + teActionRecId);
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
-		Object[] transFieldValuePairs1 = new Object[] {"BookId", bookId};
+		Object[] transFieldValuePairs = new Object[] {"BookId", bookId};
+		Object[] transFieldValuePairs1 = ArrayUtils.addAll(transFieldValuePairs, fvList);
 		transRep.transactionSetFieldsValues(transFieldValuePairs1);
 		transRep.transactionSetTimeout(SetServerSourceCurrency.TIMEOUT_S);
 		transRep.transactionVerifyReturn("0", "OK");
