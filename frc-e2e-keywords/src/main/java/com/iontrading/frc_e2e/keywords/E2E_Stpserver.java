@@ -22,10 +22,22 @@ import com.iontrading.robotframework.keywords2.MkvRecordRepository;
 public class E2E_Stpserver {
 	public static final String ROBOT_LIBRARY_SCOPE = "TEST CASE";
 	private static final RobotLogger htmlLogger = RobotLogger.getLogger(E2E_Stpserver.class.getName());
-	private static FunctionRepository funRep = new FunctionRepository();
-	private static final ILogger logger = new MkvLibraryLogFactory().createLogger();
-	private static MkvRecordRepository recordRep = new MkvRecordRepository();
-	
+
+	/**
+	 * *Description:* This keyword is required to insert new STP source in stpserver.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| InsertGatewaySourceInSTP | ESPEED|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *   	- *For Example:* Source cannot be blank.
+	 *
+	 */
 	@RobotKeyword
 	public void InsertGatewaySourceInSTP(String gatewaySource)
 	throws Exception {
@@ -35,6 +47,21 @@ public class E2E_Stpserver {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is required to remove existing STP source in stpserver.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| removeGatewaySourceInSTP | ESPEED|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *   	- *For Example:* Source cannot be blank.
+	 *
+	 */
 	@RobotKeyword
 	public void removeGatewaySourceInSTP(String gatewaySource)
 	throws Exception {
@@ -44,6 +71,21 @@ public class E2E_Stpserver {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());	
 	}
 	
+	
+	/**
+	 * *Description:* This keyword is required to set configuration values for the stp source inserted.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| configureGatewaySourceInSTP | ESPEED| DefaultBookId | BookID1 | UseQtyNominal |1 |
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by Transaction call>"
+	 *
+	 */
 	@RobotKeyword
 	public String configureGatewaySourceInSTP(String gatewaySource, Object[] fvParams)
 	throws Exception {
@@ -57,18 +99,50 @@ public class E2E_Stpserver {
 		return response;
 	}
 	
+	/**
+	 * *Description:* This keyword is required to set filter expression for the trades to be processed by STP.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| setFilterTradeExprInSTP | ESPEED| IF(Verb=2,"N","Y") |
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public String setFilterTradeExprInSTP(String gatewaySource,String filterExpression)
 	throws Exception {
 		ITransactionCallResult tResult = null;
 		String response = null;
-		Object[] args=new Object [] {"FilterExpr",filterExpression};//IF(Verb=2,"N","Y")
+		Object[] args=new Object [] {"FilterExpr",filterExpression};//
 		tResult = TransactionUtils.doTransaction(SetServerSourceCurrency.STPSERVER_SOURCE, "STP_SOURCES_CONFIG", SetServerSourceCurrency.STPSERVER_CURRENCY, gatewaySource, SetServerSourceCurrency.TIMEOUT_M, args);
 		response = TransactionUtils.transactionVerifyResult(tResult);
 		htmlLogger.info("Transaction Result: " + response);
 		return response;
-		//DefaultBookId	${_BOOKID_1_}	InstrumentMapSource	${GLOBAL_MAPPING_SOURCE}	UseQtyNominal	1
 	}
+	/**
+	 * *Description:* This keyword is required to insert field mapping for the trades to be processed by STP.
+	 *
+	 * *Parameters:*
+	 * 	- _fieldName_: Name of the field to be mapped 
+	 * 	- _fieldValue_: value with which the field will be override
+	 *  - _valueType_: Expression or literal to be used.
+	 *  
+	 * *Usage:*
+	 * 		| setFilterTradeExprInSTP | ESPEED| Date | CM_INSTRUMENT.Date | 2 |
+	 *		| setFilterTradeExprInSTP | ESPEED| CPKey | CPKey1 | 1 |
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	
 	@RobotKeyword
 	public void insertFieldMappingInSTP(String gatewaySource,String fieldName ,String fieldValue ,int valueType )
