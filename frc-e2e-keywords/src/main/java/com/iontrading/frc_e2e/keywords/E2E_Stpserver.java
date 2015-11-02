@@ -152,4 +152,28 @@ public class E2E_Stpserver {
 				funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.STPSERVER_SOURCE, "InsertFieldMapping", SetServerSourceCurrency.TIMEOUT_M,args );
 				htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 			}
+	
+	/**
+	 * *Description:* This keyword is required to insert new STP source in stpserver.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| InsertGatewaySourceInSTP | ESPEED|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *   	- *For Example:* Source cannot be blank.
+	 *
+	 */
+	@RobotKeyword
+	public void configureCounterPartyInSTP(String gatewaySource,int aggressed,int priority,String value,int valueType)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Source",gatewaySource,"Aggressed",aggressed,"Priority",priority,"Value",value,"ValueType",valueType};
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.STPSERVER_SOURCE, "InsertCounterparty", SetServerSourceCurrency.TIMEOUT_M,args );
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
 }
