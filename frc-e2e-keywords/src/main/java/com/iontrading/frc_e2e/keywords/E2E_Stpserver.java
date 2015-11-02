@@ -169,7 +169,7 @@ public class E2E_Stpserver {
 	 *
 	 */
 	@RobotKeyword
-	public void configureCounterPartyInSTP(String gatewaySource,int aggressed,int priority,String value,int valueType)
+	public void insertCounterPartyInSTP(String gatewaySource,int aggressed,int priority,String value,int valueType)
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
 		Object[] args=new Object [] {"Source",gatewaySource,"Aggressed",aggressed,"Priority",priority,"Value",value,"ValueType",valueType};
