@@ -136,4 +136,11 @@ public class SetServerSourceCurrency {
 		STPSERVER_SOURCE = source;
 		STPSERVER_CURRENCY = currency;		
 	}
+	
+	@RobotKeyword
+	public void setRLMSourceCurrency(String source, String currency) {
+
+		RLM_SOURCE = source;
+		RLM_CURRENCY = currency;		
+	}
 }

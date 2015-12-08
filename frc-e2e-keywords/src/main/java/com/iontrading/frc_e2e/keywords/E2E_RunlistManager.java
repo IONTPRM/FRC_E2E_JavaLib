@@ -31,7 +31,6 @@ public class E2E_RunlistManager {
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
 		Object[] args=new Object [] {"Name",columnName};
-		//Object[] args=new Object [] {"Source",gatewaySource,"Aggressed",aggressed,"Priority",priority,"Value",value,"ValueType",valueType};
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnCreate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
