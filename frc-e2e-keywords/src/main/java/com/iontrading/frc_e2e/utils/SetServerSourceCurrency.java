@@ -21,7 +21,8 @@ public class SetServerSourceCurrency {
 	public static String RISK_CURRENCY;
 	public static String STPSERVER_SOURCE;
 	public static String STPSERVER_CURRENCY;
-	
+	public static String RLM_SOURCE;
+	public static String RLM_CURRENCY;
 	
 	
 	public static String TIMEOUT_S;

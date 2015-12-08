@@ -27,6 +27,18 @@ package com.iontrading.frc_e2e.reusableutils;
 	    return fResult;
 	  }
 	  
+	  public static IFunctionCallResult callFunctionWithVarArgs(String source, String name, String timeout,Object[] mainArgs,Object... args)
+			  throws Exception
+			  {
+		  htmlLogger.info("Calling Function " + source + "_" + name + " with parameters " + Arrays.toString(args) + " with timeout " + timeout);
+		  logger.action("Calling function " + source + "_" + name + " with parameters " + Arrays.toString(args) + " with timeout " + timeout).end();
+		  funRep.functionDefine(source, name, mainArgs);
+		  funRep.functionSetVarArgs(args);
+		  funRep.functionSetTimeout(timeout);
+		  IFunctionCallResult fResult = funRep.functionCall();
+		  return fResult;
+		}
+	  
 	  public static String functionVerifyCode(IFunctionCallResult fResult, String exceptionMessage, int expectedReturnCode)
 	    throws ResultNotMatchesException, MkvException
 	  {
