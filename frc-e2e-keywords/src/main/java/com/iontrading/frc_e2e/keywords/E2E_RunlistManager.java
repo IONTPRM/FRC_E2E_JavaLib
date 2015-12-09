@@ -69,7 +69,7 @@ public class E2E_RunlistManager {
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
 		Object[] args=new Object [] {"Id",columnSourceId};
-		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceUpdate", SetServerSourceCurrency.TIMEOUT_M,args);
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceDelete", SetServerSourceCurrency.TIMEOUT_M,args);
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
@@ -78,7 +78,7 @@ public class E2E_RunlistManager {
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
 		Object[] args=new Object [] {"Name",templateName};
-		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceUpdate", SetServerSourceCurrency.TIMEOUT_M,args);
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "TemplateCreate", SetServerSourceCurrency.TIMEOUT_M,args);
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
