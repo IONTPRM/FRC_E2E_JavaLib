@@ -36,4 +36,59 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnCreate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
+	
+	@RobotKeyword
+	public void updateColumnForRLM(String columnId, Object[] fvParams)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Id",columnId};
+		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnUpdate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
+	@RobotKeyword
+	public void createColumnSourceForRLM(String columnName, Object[] fvParams)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Name",columnName};
+		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceCreate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
+	@RobotKeyword
+	public void updateColumnSourceForRLM(String columnSourceId, Object[] fvParams)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Id",columnSourceId};
+		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceUpdate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
+	@RobotKeyword
+	public void deleteColumnSourceForRLM(String columnSourceId)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Id",columnSourceId};
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceUpdate", SetServerSourceCurrency.TIMEOUT_M,args);
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
+	@RobotKeyword
+	public void createTemplateForRLM(String templateName)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Name",templateName};
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceUpdate", SetServerSourceCurrency.TIMEOUT_M,args);
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
+	@RobotKeyword
+	public void createTemplateColumnForRLM(String columnSourceId, Object[] fvParams)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Id",columnSourceId};
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceUpdate", SetServerSourceCurrency.TIMEOUT_M,args);
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
 }
