@@ -83,10 +83,10 @@ public class E2E_RunlistManager {
 	}
 	
 	@RobotKeyword
-	public void createTemplateColumnForRLM(String templateId, Object[] fvParams)
+	public void createTemplateColumnForRLM(String columnName, Object[] fvParams)
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
-		Object[] args=new Object [] {"Id",templateId};
+		Object[] args=new Object [] {"Name",columnName};
 		//funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "TemplateColumnCreate", SetServerSourceCurrency.TIMEOUT_M,args);
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "TemplateColumnCreate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
