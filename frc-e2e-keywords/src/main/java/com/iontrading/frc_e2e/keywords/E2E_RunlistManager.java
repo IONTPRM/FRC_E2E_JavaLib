@@ -55,6 +55,15 @@ public class E2E_RunlistManager {
 	}
 	
 	@RobotKeyword
+	public void deleteColumnForRLM(String columnId, Object[] fvParams)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Id",columnId};
+		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnDelete", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
+	@RobotKeyword
 	public void createColumnSourceForRLM(String columnName, Object[] fvParams)
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
@@ -87,6 +96,15 @@ public class E2E_RunlistManager {
 		IFunctionCallResult funcRes = null;	
 		Object[] args=new Object [] {"Name",templateName};
 		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "TemplateCreate", SetServerSourceCurrency.TIMEOUT_M,args);
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
+	@RobotKeyword
+	public void deleteTemplateForRLM(String templateId)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Name",templateId};
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "TemplateDelete", SetServerSourceCurrency.TIMEOUT_M,args);
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
@@ -150,7 +168,7 @@ public class E2E_RunlistManager {
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
 		Object[] args=new Object [] {"Name",recipientName};
-		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "RecipientCreate", SetServerSourceCurrency.TIMEOUT_M,args );
+		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "RecipientDelete", SetServerSourceCurrency.TIMEOUT_M,args );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
@@ -170,6 +188,15 @@ public class E2E_RunlistManager {
 		IFunctionCallResult funcRes = null;	
 		Object[] args=new Object [] {"Id",groupId};
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "RecipientGroupUpdate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
+		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
+	}
+	
+	@RobotKeyword
+	public void deleteRecipientGrpFromRLM(String grpName)
+	throws Exception {
+		IFunctionCallResult funcRes = null;	
+		Object[] args=new Object [] {"Name",grpName};
+		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "RecipientGroupDelete", SetServerSourceCurrency.TIMEOUT_M,args );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
