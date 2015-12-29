@@ -117,6 +117,8 @@ public class E2E_PXE {
 	@RobotKeyword
 	public void priceInstrumentInPXE(String instrId, Double value, String valueType) throws Exception {
 		
+		//htmlLogger.info("Calling keyword priceInstrumentInPXE with argument")
+		
 		// to create record in PRICINGS table
 		Object[] args = new Object[] {"BondID", instrId};
 		funcRep.functionDefine(SetServerSourceCurrency.PXE_SOURCE, "CreatePricing", args);
