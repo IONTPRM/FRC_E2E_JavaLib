@@ -164,10 +164,10 @@ public class E2E_RunlistManager {
 	}
 	
 	@RobotKeyword
-	public void deleteRecipientFromRLM(String recipientName)
+	public void deleteRecipientFromRLM(String recipientId)
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
-		Object[] args=new Object [] {"Name",recipientName};
+		Object[] args=new Object [] {"Id",recipientId};
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "RecipientDelete", SetServerSourceCurrency.TIMEOUT_M,args );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
