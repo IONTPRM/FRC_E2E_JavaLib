@@ -192,10 +192,10 @@ public class E2E_RunlistManager {
 	}
 	
 	@RobotKeyword
-	public void deleteRecipientGrpFromRLM(String grpName)
+	public void deleteRecipientGrpFromRLM(String grpId)
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
-		Object[] args=new Object [] {"Name",grpName};
+		Object[] args=new Object [] {"Id",grpId};
 		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "RecipientGroupDelete", SetServerSourceCurrency.TIMEOUT_M,args );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
