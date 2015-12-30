@@ -103,7 +103,7 @@ public class E2E_RunlistManager {
 	public void deleteTemplateForRLM(String templateId)
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
-		Object[] args=new Object [] {"Name",templateId};
+		Object[] args=new Object [] {"Id",templateId};
 		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "TemplateDelete", SetServerSourceCurrency.TIMEOUT_M,args);
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
