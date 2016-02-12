@@ -165,7 +165,7 @@ public class E2E_Tradeentry {
 		// Just to wait for 1 second in case ticket is not initialized correctly yet
 		dplayerKey.DPlayer("Wait For Sec", new Object[] {1});
 		
-		htmlLogger.info("transaction on TradeentryAction record id with following field value pairs : " + fieldValuePairs);
+		htmlLogger.info("transaction on TradeentryAction record id with following field value pairs : " + fieldValuePairs.toString());
 		
 		transRep.transactionDefine(SetServerSourceCurrency.TRADEENTRY_SOURCE, "TRADEENTRYACTION", SetServerSourceCurrency.TRADEENTRY_CURRENCY, teActionRecId);
 		transRep.transactionSetFieldsValues(fieldValuePairs);
