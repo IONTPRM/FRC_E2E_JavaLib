@@ -58,7 +58,7 @@ public class E2E_Refdata {
 		ITransactionCallResult tResult = null;
 		String response = null;
 		Object[] args=new Object [] {"InstrumentIdInclude",instrIdList};
-		tResult = TransactionUtils.doTransaction(SetServerSourceCurrency.REFDATA_SOURCE, "INTRUMENTGROUP", SetServerSourceCurrency.REFDATA_CURRENCY, grpName, SetServerSourceCurrency.TIMEOUT_M, args);
+		tResult = TransactionUtils.doTransaction(SetServerSourceCurrency.REFDATA_SOURCE, "INTSRUMENTGROUP", SetServerSourceCurrency.REFDATA_CURRENCY, grpName, SetServerSourceCurrency.TIMEOUT_M, args);
 		response = TransactionUtils.transactionVerifyResult(tResult);
 		htmlLogger.info("Transaction Result: " + response);
 		return response;
