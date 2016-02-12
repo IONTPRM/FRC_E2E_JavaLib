@@ -44,10 +44,10 @@ public class E2E_Refdata {
 	}
 	
 	@RobotKeyword
-	public void addInstrumentGrp(String grpName)
+	public void addInstrumentGrp(String grpName,String desc,String rule,int isSmart)
 	throws Exception {
 		IFunctionCallResult funcRes = null;	
-		Object[] args=new Object [] {"Id",grpName};
+		Object[] args=new Object [] {"Id",grpName,"Desc",desc,"Rule",rule,"IsSmart",isSmart};
 		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.REFDATA_SOURCE, "CreateInstrumentGroup", SetServerSourceCurrency.TIMEOUT_M,args );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
