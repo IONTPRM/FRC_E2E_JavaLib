@@ -59,9 +59,10 @@ public class E2E_Refdata {
 		String response = null;
 		Object[] args=new Object [] {"InstrumentIdInclude",instrIdList};
 		tResult = TransactionUtils.doTransaction(SetServerSourceCurrency.REFDATA_SOURCE, "INSTRUMENTGROUP", SetServerSourceCurrency.REFDATA_CURRENCY, grpName, SetServerSourceCurrency.TIMEOUT_M, args);
-		response = TransactionUtils.transactionVerifyResult(tResult);
-		htmlLogger.info("Transaction Result: " + response);
-		return response;
+		//response = TransactionUtils.transactionVerifyResult(tResult);
+		//htmlLogger.info("Transaction Result: " + response);
+		htmlLogger.info("Transaction Result: " + tResult);
+		return tResult.toString();
 	}
 	
 	@RobotKeyword
