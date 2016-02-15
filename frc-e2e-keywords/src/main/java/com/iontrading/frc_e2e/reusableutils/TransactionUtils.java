@@ -40,9 +40,9 @@ public class TransactionUtils
 	{
 		htmlLogger.info("error code :"+tResult.getErrCode());
 
-		htmlLogger.info("error msg :"+tResult.getErrMessage().contains("OK"));
+		htmlLogger.info("error msg :"+tResult.getErrMessage());
 
-		if ((tResult.getErrCode() != 0) || (!tResult.getErrMessage().contains("OK"))) {
+		if ((tResult.getErrCode() != 0) || (!tResult.getErrMessage().contains("OK")) || (!tResult.getErrMessage().contains("Ok"))) {
 			throw new ResultNotMatchesException("Result: " + tResult.getErrMessage());//|| (!tResult.getErrMessage().contains("Ok"))
 		}
 		return tResult.getErrMessage();
