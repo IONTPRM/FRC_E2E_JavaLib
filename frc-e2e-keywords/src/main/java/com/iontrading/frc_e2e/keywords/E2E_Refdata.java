@@ -43,6 +43,17 @@ public class E2E_Refdata {
 		return wfInstrId;
 	}
 	
+	/**
+	 * It adds the instrument group in refdata .
+	 * 
+	 * *Parameters:*
+	 * 	- _grpName_: Instrument groupName. 
+	 * 	- _Desc_: Description of the instrument group
+	 *  - _Rule_: Rule on which instrument will be added in group.
+	 * 	- _isSmart_: Optional flag
+	 * 
+	 */
+	
 	@RobotKeyword
 	public void addInstrumentGrp(String grpName,String desc,String rule,int isSmart)
 	throws Exception {
@@ -52,6 +63,15 @@ public class E2E_Refdata {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	
+	/**
+	 * It adds the instrument in instrument group of refdata .
+	 * 
+	 * *Parameters:*
+	 * 	- _grpName_: Instrument groupName. 
+	 * 	- _instrIdList_:List of instrument to be added in instrument group
+	 * 
+	 */
 	@RobotKeyword
 	public String addInstrumentInInstrumentGrp(String grpName,String instrIdList)
 	throws Exception {
@@ -65,6 +85,13 @@ public class E2E_Refdata {
 		return tResult.toString();
 	}
 	
+	/**
+	 * It remove the instrument group from refdata .
+	 * 
+	 * *Parameters:*
+	 * 	- _grpName_: Instrument groupName. 
+	 * 
+	 */
 	@RobotKeyword
 	public void deleteInstrumentGrp(String grpName)
 	throws Exception {

@@ -22,18 +22,17 @@ public class E2E_RunlistManager {
 		
 	
 	/**
-	 * *Description:* This keyword is required to insert counterparty to be used by STP source in stpserver.
+	 * *Description:* This keyword is used to create column in RunlistManager.
 	 *
 	 *  
 	 * *Usage:*
-	 * 		| insertCounterPartyInSTP | ESPEED| 0 | 0| CP1000|1|
+	 * 		| createColumnForRLM | TestBidPrice| Alias| TBpc|DefaultColumnFormatId|String_Right_2|FieldType|REAL|FieldValueType|PRICE|Verb|1|
 	 *
 	 * *Return Values:*
 	 *
 	 * 	 - *On Success:* "OK"
 	 *
 	 * 	 - *On Failure:* "<Error message returned by function call>"
-	 *   	- *For Example:* Source cannot be blank.
 	 *
 	 */
 	@RobotKeyword
@@ -45,6 +44,21 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is used to update column fields in RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| updateColumnForRLM | columnId| Alias| TBpc_updated|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
+	
 	@RobotKeyword
 	public void updateColumnForRLM(String columnId, Object[] fvParams)
 	throws Exception {
@@ -53,6 +67,21 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnUpdate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
+	
+	/**
+	 * *Description:* This keyword is used to delete column from RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| deleteColumnForRLM | columnId|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	
 	@RobotKeyword
 	public void deleteColumnForRLM(String columnId, Object[] fvParams)
@@ -80,7 +109,20 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceUpdate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
-	
+	/**
+	 * *Description:* This keyword is used to delete columnSource from RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| deleteColumnForRLM | columnSourceId|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void deleteColumnSourceForRLM(String columnSourceId)
 	throws Exception {
@@ -90,6 +132,20 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is used to Create template in RunListManager
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| createTemplateForRLM | templateName|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void createTemplateForRLM(String templateName)
 	throws Exception {
@@ -98,6 +154,22 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "TemplateCreate", SetServerSourceCurrency.TIMEOUT_M,args);
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
+	
+
+	/**
+	 * *Description:* This keyword is used to delete template in RunListManager
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| deleteTemplateForRLM | templateId|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	
 	@RobotKeyword
 	public void deleteTemplateForRLM(String templateId)
@@ -108,6 +180,21 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is used to Create templateColumn in RunListManager
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| createTemplateColumnForRLM | RunColumnId|TemplateId|TestTemplate|ColumnSourceId|TestBidPrce_1|ColumnFormatId|StringRight_2|IsHidden|False|Position|1|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
+	
 	@RobotKeyword
 	public void createTemplateColumnForRLM(String columnName, Object[] fvParams)
 	throws Exception {
@@ -116,6 +203,20 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "TemplateColumnCreate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
+	/**
+	 * *Description:* This keyword is used to Create New runList in RunListManager
+	 *
+	 *  
+	 * *Usage:*
+	 * 		|createRunListForRLM|TestRunList| InstrumentGroup| TestInstrGrp| MessageSubject| TestRunList| SenderName| ankit | SenderAddress|ankit.jain@iontrading.com| RecipientGroups|MyGrp_1| ListType|RUN| TemplateId| test_template_1|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	
 	@RobotKeyword
 	public void createRunListForRLM(String runlistName, Object[] fvParams)
@@ -135,7 +236,20 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "RunListUpdate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
-	
+	/**
+	 * *Description:* This keyword is used to delete runList from RunListManager
+	 *
+	 *  
+	 * *Usage:*
+	 * 		|deleteRunListForRLM|TestRunList|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void deleteRunListForRLM(String runlistId)
 	throws Exception {
@@ -144,7 +258,20 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunction(SetServerSourceCurrency.RLM_SOURCE, "RunListDelete", SetServerSourceCurrency.TIMEOUT_M,args);
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
-	
+	/**
+	 * *Description:* This keyword is used to add recipient in RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		|createRecipientForRLM|ankit|Address|ankit.jain@iontrading.com|SpeedDial||UUID|Test_uuid_01|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void createRecipientForRLM(String recipientName, Object[] fvParams)
 	throws Exception {
@@ -162,7 +289,20 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "RecipientUpdate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
-	
+	/**
+	 * *Description:* This keyword is used to delete recipient from RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| RecipientDelete | recipientId|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void deleteRecipientFromRLM(String recipientId)
 	throws Exception {
@@ -172,6 +312,20 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is used to create recipient group in RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| RecipientGroupCreate | grpName|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void createRecipientGrpFromRLM(String grpName)
 	throws Exception {
@@ -181,7 +335,20 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
-	
+	/**
+	 * *Description:* This keyword is used to update recipient group in RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| RecipientGroupUpdate | groupId|fvparams|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void updateRecipientGroupForRLM(String groupId, Object[] fvParams)
 	throws Exception {
@@ -190,6 +357,21 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "RecipientGroupUpdate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
+	
+	/**
+	 * *Description:* This keyword is used to delete columnSource from RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| deleteColumnForRLM | columnSourceId|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	
 	@RobotKeyword
 	public void deleteRecipientGrpFromRLM(String grpId)
