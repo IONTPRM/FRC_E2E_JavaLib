@@ -92,6 +92,20 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is used to Create column source from RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 	 |createColumnSourceForRLM| TestBidPrice | RunColumnId| TestBidPrice_01| RunSourceId| PXE| SourceFields| BidPrice|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void createColumnSourceForRLM(String columnName, Object[] fvParams)
 	throws Exception {
@@ -100,6 +114,21 @@ public class E2E_RunlistManager {
 		funcRes = FunctionUtils.callFunctionWithVarArgs(SetServerSourceCurrency.RLM_SOURCE, "ColumnSourceCreate", SetServerSourceCurrency.TIMEOUT_M,args,fvParams );
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
+	
+	/**
+	 * *Description:* This keyword is used to Update column source from RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 	 |updateColumnSourceForRLM| TestBidPrice_1 |SourceFields| AskPrice|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	
 	@RobotKeyword
 	public void updateColumnSourceForRLM(String columnSourceId, Object[] fvParams)
@@ -228,6 +257,21 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is used to update existing runList in RunListManager
+	 *
+	 *  
+	 * *Usage:*
+	 * 		|createRunListForRLM|TestRunList_Id| InstrumentGroup| TestInstrGrp1|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
+	
 	@RobotKeyword
 	public void updateRunListForRLM(String runlistId, Object[] fvParams)
 	throws Exception {
@@ -281,6 +325,20 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is used to update recipient information in RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		|updateRecipientForRLM|recipientid|Address|tilak.raj@iontrading.com|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void updateRecipientForRLM(String recipientName, Object[] fvParams)
 	throws Exception {
@@ -382,6 +440,20 @@ public class E2E_RunlistManager {
 		htmlLogger.info("Function Result: "+ funcRes.getErrorMessage());
 	}
 	
+	/**
+	 * *Description:* This keyword is used to verify fields of RUN_AXE chain record of RunlistManager.
+	 *
+	 *  
+	 * *Usage:*
+	 * 		| verifyRunListFields | INSTR1|NetPosition|100|SubscriptionStatus|Yes|
+	 *
+	 * *Return Values:*
+	 *
+	 * 	 - *On Success:* "OK"
+	 *
+	 * 	 - *On Failure:* "<Error message returned by function call>"
+	 *
+	 */
 	@RobotKeyword
 	public void verifyRunListFields(String instrId, Object[] fieldValuePairs) throws Exception {
 		htmlLogger.info("Length of arg list is " + fieldValuePairs.length);
